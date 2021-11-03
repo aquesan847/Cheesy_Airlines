@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintBottom_toTopOf="@+id/img_cheesy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@color/black">
+
+        <ImageView
+            android:id="@+id/imgMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:contentDescription="@string/todo"
+            android:onClick="showPopup"
+            android:paddingEnd="16dp"
+            app:srcCompat="@drawable/ic_baseline_menu_24"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck"
+            tools:layout_editor_absoluteX="331dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <ImageView
+            android:id="@+id/imgFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:contentDescription="@string/todo"
+            android:onClick="showPopup"
+            android:paddingEnd="16dp"
+            app:srcCompat="@drawable/ic_baseline_favorite_border_24"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,ImageContrastCheck"
+            tools:layout_editor_absoluteX="307dp"
+            tools:layout_editor_absoluteY="16dp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/img_cheesy"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/todo"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:srcCompat="@drawable/cheesy_airlines" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="411dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_begin="160dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_cheesy" />
+
+    <EditText
+        android:id="@+id/et_origin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/et_ciudad_origen"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/et_destiny"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_cheesy"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/et_destiny"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/et_ciudad_destino"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/et_origin"
+        app:layout_constraintTop_toBottomOf="@+id/img_cheesy"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/tv_datos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/tv_datos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_destiny" />
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/et_name"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_surname"
+        app:layout_constraintEnd_toStartOf="@+id/et_surname"
+        app:layout_constraintStart_toEndOf="@+id/spinner"
+        app:layout_constraintTop_toTopOf="@+id/et_surname"
+        tools:ignore="TextContrastCheck" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:entries="@array/pseudonimes"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_name"
+        app:layout_constraintEnd_toStartOf="@+id/et_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_name"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/et_surname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/et_surname"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/et_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_datos"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/et_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:hint="@string/et_address"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/et_phone"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/et_phone"
+        android:importantForAutofill="no"
+        android:inputType="phone"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/et_address"
+        app:layout_constraintTop_toTopOf="@+id/et_address"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/et_email"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/switch_mobility"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_address"
+        tools:ignore="TextContrastCheck" />
+
+    <Switch
+        android:id="@+id/switch_mobility"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:minHeight="48dp"
+        android:text="@string/switch_text"
+        app:layout_constraintBottom_toBottomOf="@+id/et_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/et_email"
+        app:layout_constraintTop_toTopOf="@+id/et_email" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="379dp"
+        android:layout_height="102dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_email"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/cbFirstClass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/cb_first_class" />
+
+                <CheckBox
+                    android:id="@+id/cbWindowedSeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/cb_window_seat" />
+
+                <CheckBox
+                    android:id="@+id/cbPet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/cb_pet" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkBox2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/cb_breakfast" />
+
+                <CheckBox
+                    android:id="@+id/checkBox3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/cb_lunch" />
+
+                <CheckBox
+                    android:id="@+id/checkBox4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/cb_dinner" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/tv_insurance" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:scrollbars="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioBtYes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/rb_yes"
+                        app:layout_constraintEnd_toStartOf="@+id/radioBtNo"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RadioButton
+                        android:id="@+id/radioBtNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/rb_no"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/radioBtYes"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btBuy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/bt_buy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imgBtBuy"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+    <ImageButton
+        android:id="@+id/imgBtBuy"
+        android:layout_width="140dp"
+        android:layout_height="75sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="@string/todo"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/btBuy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btBuy"
+        app:layout_constraintTop_toTopOf="@+id/btBuy"
+        app:srcCompat="@drawable/quick_buy_now_button"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
