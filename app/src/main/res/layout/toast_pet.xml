@@ -8,13 +8,13 @@
     android:padding="10dp"
 
     android:background="@drawable/shape_toast"
-    android:backgroundTint="#FF0048">
+    android:backgroundTint="#9dfc03">
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:drawablePadding="8dp"
-        android:textColor="@color/white"
-        app:drawableStartCompat="@drawable/ic_baseline_favorite_border_24" />
+        android:textColor="@color/black"
+        app:drawableStartCompat="@drawable/pet" />
 </LinearLayout>

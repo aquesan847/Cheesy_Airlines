@@ -7,4 +7,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="cancel_button">#ef8379</color>
+    <color name="buy_alert_button">#47b27e</color>
 </resources>

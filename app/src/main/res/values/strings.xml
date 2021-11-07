@@ -38,4 +38,6 @@
     <string name="action_settings14">Travelling partners</string>
     <string name="buy_now_snack">An error has happened</string>
     <string name="buy_now_error">Retry</string>
+    <string name="title_alert">Normal buy</string>
+    <string name="msg_alert">You are going to choose normal buy, are you sure about this?</string>
 </resources>
