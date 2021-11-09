@@ -40,4 +40,9 @@
     <string name="buy_now_error">Retry</string>
     <string name="title_alert">Normal buy</string>
     <string name="msg_alert">You are going to choose normal buy, are you sure about this?</string>
+    <string name="tv_message_sir_mr">Mr.Pepe, your travel from Madrid to London have been purchased.</string>
+    <string name="tv_extras">Extras chosen:</string>
+    <string name="et_date_departure">Leaving</string>
+    <string name="et_date_destination">Arrival</string>
+
 </resources>

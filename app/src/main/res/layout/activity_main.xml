@@ -110,14 +110,42 @@
         tools:ignore="TextContrastCheck" />
 
     <TextView
-        android:id="@+id/tv_datos"
-        android:layout_width="wrap_content"
+        android:id="@+id/et_date_departure"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/tv_datos"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:drawableEnd="@drawable/date_range"
+        android:gravity="center"
+        android:hint="@string/et_date_departure"
+        android:importantForAutofill="no"
+        android:minHeight="48dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/et_date_destination"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_destiny" />
+        app:layout_constraintTop_toBottomOf="@+id/et_origin"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/et_date_destination"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:drawableStart="@drawable/date_range"
+        android:gravity="center"
+        android:hint="@string/et_date_destination"
+        android:importantForAutofill="no"
+        android:minHeight="48dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/et_date_departure"
+        app:layout_constraintTop_toBottomOf="@+id/et_origin"
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/et_name"
@@ -129,10 +157,10 @@
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/et_surname"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner"
         app:layout_constraintEnd_toStartOf="@+id/et_surname"
         app:layout_constraintStart_toEndOf="@+id/spinner"
-        app:layout_constraintTop_toTopOf="@+id/et_surname"
+        app:layout_constraintTop_toTopOf="@+id/spinner"
         tools:ignore="TextContrastCheck" />
 
     <Spinner
@@ -140,29 +168,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:entries="@array/pseudonimes"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/et_name"
         app:layout_constraintEnd_toStartOf="@+id/et_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/et_name"
+        app:layout_constraintTop_toBottomOf="@+id/et_date_departure"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/et_surname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="@string/et_surname"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/et_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_datos"
+        app:layout_constraintTop_toTopOf="@+id/et_name"
         tools:ignore="TextContrastCheck" />
 
     <EditText
@@ -237,7 +265,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="379dp"
         android:layout_height="102dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_email"
@@ -391,5 +419,15 @@
         app:layout_constraintTop_toTopOf="@+id/btBuy"
         app:srcCompat="@drawable/quick_buy_now_button"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/et_date_departure"
+        app:layout_constraintEnd_toStartOf="@+id/et_date_destination"
+        app:layout_constraintStart_toEndOf="@+id/et_date_departure"
+        app:layout_constraintTop_toTopOf="@+id/et_date_departure"
+        app:srcCompat="@drawable/plane" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

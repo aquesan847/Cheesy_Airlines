@@ -7,6 +7,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,16 +17,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+
+
+    TextView tvDepartureDate;
+    TextView tvDestinationeDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +62,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         CheckBox cbFirstClass = findViewById(R.id.cbFirstClass);
         cbFirstClass.setOnCheckedChangeListener(this);
+        tvDepartureDate = findViewById(R.id.et_date_departure);
+        tvDepartureDate.setOnClickListener(this);
+
+        tvDestinationeDate = findViewById(R.id.et_date_destination);
+        tvDestinationeDate.setOnClickListener(this);
     }
 
     public void showPopup(View v) {
@@ -92,8 +106,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setAction(R.string.buy_now_error, new MyUndoListener());
                 snackbarBuyNow.show();
                 break;
+
+            case R.id.et_date_departure:
+                showDatePickerDialog(R.id.et_date_departure);
+                break;
+
+            case R.id.et_date_destination:
+                showDatePickerDialog(R.id.et_date_destination);
+                break;
         }
     }
+
+    private void showDatePickerDialog(int id) {
+        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                final String selectedDate = day + "-" + (month+1) + "-" + year;
+                if (id == R.id.et_date_departure) {
+                    tvDepartureDate.setText(selectedDate);
+                } else {
+                    tvDestinationeDate.setText(selectedDate);
+                }
+            }
+        });
+
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+
+    }
+
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
