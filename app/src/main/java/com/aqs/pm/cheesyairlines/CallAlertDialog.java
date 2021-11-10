@@ -24,7 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class CallAlertDialog extends Activity{
 
-    public void showDialog(Activity activity) {
+    public void showDialog(Activity activity, Bundle bundle) {
         Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -43,8 +43,10 @@ public class CallAlertDialog extends Activity{
         floatActionBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(activity.getApplication(), SecondActivity.class));
-                Toast.makeText(activity,"Bought!" ,Toast.LENGTH_SHORT).show();
+                Context context = v.getContext();
+                Intent intent = new Intent(context, SecondActivity.class);
+                intent.putExtra("bundle", bundle);
+                context.startActivity(intent);
             }
         });
 

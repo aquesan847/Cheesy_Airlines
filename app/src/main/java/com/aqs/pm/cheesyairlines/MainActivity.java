@@ -21,6 +21,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,8 +34,9 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
 
-    TextView tvDepartureDate;
-    TextView tvDestinationeDate;
+    TextView tvDepartureDate, tvDestinationeDate, tvSurname, tvFrom, tvDestination;
+
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvDepartureDate = findViewById(R.id.et_date_departure);
         tvDepartureDate.setOnClickListener(this);
 
+        tvSurname = findViewById(R.id.et_surname);
+        tvFrom = findViewById(R.id.et_origin);
+        tvDestination = findViewById(R.id.et_destiny);
+
         tvDestinationeDate = findViewById(R.id.et_date_destination);
         tvDestinationeDate.setOnClickListener(this);
     }
@@ -80,10 +86,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        Bundle bundle = new Bundle();
+        spinner = findViewById(R.id.spinner);
         switch (view.getId()){
             case R.id.btBuy:
-                CallAlertDialog alert = new CallAlertDialog();
-                alert.showDialog(MainActivity.this);
+                if (!tvSurname.getText().toString().isEmpty() || !tvFrom.getText().toString().isEmpty()
+                        ||!tvDestination.getText().toString().isEmpty()) {
+                    CallAlertDialog alert = new CallAlertDialog();
+                    bundle.putString("dateDeparture", String.valueOf(tvDepartureDate.getText()));
+                    bundle.putString("dateDestination", String.valueOf(tvDestinationeDate.getText()));
+                    bundle.putString("name", String.valueOf(tvSurname.getText()));
+                    bundle.putString("sir", spinner.getSelectedItem().toString());
+                    bundle.putString("from", String.valueOf(tvFrom.getText()));
+                    bundle.putString("to", String.valueOf(tvDestination.getText()));
+                    alert.showDialog(MainActivity.this, bundle);
+                } else {
+                    Toast.makeText(this,"Empty fields!" ,Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.imgFav:
                 //If you press the heart icon at ActionBar it will display a Toast with a design.
@@ -124,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 final String selectedDate = day + "-" + (month+1) + "-" + year;
                 if (id == R.id.et_date_departure) {
                     tvDepartureDate.setText(selectedDate);
+
                 } else {
                     tvDestinationeDate.setText(selectedDate);
                 }

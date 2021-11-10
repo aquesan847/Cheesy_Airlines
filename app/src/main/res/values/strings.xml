@@ -44,5 +44,8 @@
     <string name="tv_extras">Extras chosen:</string>
     <string name="et_date_departure">Leaving</string>
     <string name="et_date_destination">Arrival</string>
-
+    <string name="tv_price">Price: </string>
+    <string name="bt_back">Back</string>
+    <string name="bt_next">Next</string>
+    <string name="bt_final">Finalize</string>
 </resources>
