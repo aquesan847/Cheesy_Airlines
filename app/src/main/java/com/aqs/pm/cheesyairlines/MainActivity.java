@@ -21,6 +21,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -35,8 +37,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     TextView tvDepartureDate, tvDestinationeDate, tvSurname, tvFrom, tvDestination;
+    RadioButton rdBtNo, rdBtYes;
 
     Spinner spinner;
+
+    Bundle bundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         CheckBox cbFirstClass = findViewById(R.id.cbFirstClass);
         cbFirstClass.setOnCheckedChangeListener(this);
+
+        CheckBox cbWindowed = findViewById(R.id.cbWindowedSeat);
+        cbWindowed.setOnCheckedChangeListener(this);
+
+        CheckBox cbBreakfast = findViewById(R.id.cbBreakfast);
+        cbBreakfast.setOnCheckedChangeListener(this);
+
+        CheckBox cbLunch = findViewById(R.id.cbLunch);
+        cbLunch.setOnCheckedChangeListener(this);
+
+        CheckBox cbDinner = findViewById(R.id.cbDinner);
+        cbDinner.setOnCheckedChangeListener(this);
+
+        rdBtYes = findViewById(R.id.radioBtYes);
+        rdBtYes.setOnCheckedChangeListener(this);
+
+        rdBtNo = findViewById(R.id.radioBtNo);
+        rdBtNo.setChecked(true);
+        rdBtNo.setOnCheckedChangeListener(this);
+
         tvDepartureDate = findViewById(R.id.et_date_departure);
         tvDepartureDate.setOnClickListener(this);
 
@@ -86,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        Bundle bundle = new Bundle();
         spinner = findViewById(R.id.spinner);
         switch (view.getId()){
             case R.id.btBuy:
@@ -143,7 +167,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 final String selectedDate = day + "-" + (month+1) + "-" + year;
                 if (id == R.id.et_date_departure) {
                     tvDepartureDate.setText(selectedDate);
-
                 } else {
                     tvDestinationeDate.setText(selectedDate);
                 }
@@ -162,6 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.cbPet:
                 //If you press the checkbox of "Pet" a toast will be displayed with a paw icon
                 if(isChecked) {
+                    bundle.putString("pet","Pet");
                     LayoutInflater inflater = getLayoutInflater();
                     View layout = inflater.inflate(R.layout.toast_pet,
                             (ViewGroup) findViewById(R.id.toast_layout_root));
@@ -177,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.cbFirstClass:
                 if (isChecked) {
                 //If you press the checkbox of "First class" a toast will be displayed with a medal icon
+                    bundle.putString("first","First Class");
                     LayoutInflater inflater2 = getLayoutInflater();
                     View layout2 = inflater2.inflate(R.layout.toast_first_class,
                             (ViewGroup) findViewById(R.id.toast_layout_root));
@@ -189,6 +214,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     toast2.show();
                 }
                 break;
+            case R.id.cbWindowedSeat:
+                if (isChecked)
+                    bundle.putString("window","Windowed Seat");
+                break;
+            case R.id.cbBreakfast:
+                if (isChecked)
+                    bundle.putString("break","Breakfast");
+                break;
+            case R.id.cbLunch:
+                if (isChecked)
+                    bundle.putString("lunch","Lunch");
+                break;
+            case R.id.cbDinner:
+                if (isChecked)
+                    bundle.putString("dinner","Dinner");
+                break;
+            case R.id.radioBtYes:
+                if (isChecked)
+                    bundle.putString("rdyes","Insurance");
+                break;
+            case R.id.switch_mobility:
+                if (isChecked)
+                    bundle.putString("mobility", "Reduced Mobility");
+                break;
+
         }
     }
 

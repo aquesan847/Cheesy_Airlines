@@ -14,11 +14,14 @@ import java.util.Locale;
 
 public class SecondActivity extends AppCompatActivity implements View.OnClickListener {
 
+
+    Bundle bundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        Bundle bundle = getIntent().getBundleExtra("bundle");
+
+        bundle = getIntent().getBundleExtra("bundle");
 
         String sir = bundle.getString("sir");
         String name = bundle.getString("name");
@@ -50,6 +53,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btNext:
                 Context context = view.getContext();
                 Intent intent = new Intent(context, ThirdActivity.class);
+                intent.putExtra("bundle", bundle);
                 context.startActivity(intent);
                 break;
         }

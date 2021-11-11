@@ -48,4 +48,5 @@
     <string name="bt_back">Back</string>
     <string name="bt_next">Next</string>
     <string name="bt_final">Finalize</string>
+    <string name="tv_receipt_title">Receipt</string>
 </resources>
