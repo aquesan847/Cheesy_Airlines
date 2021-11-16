@@ -19,13 +19,71 @@ public class ThirdActivity extends AppCompatActivity implements View.OnClickList
         bundle = getIntent().getBundleExtra("bundle");
 
         String sir = bundle.getString("sir");
-        String surname = bundle.getString("surname");
+        String name = bundle.getString("name");
         String from = bundle.getString("from");
         String to = bundle.getString("to");
+
+
+        String first = bundle.getString("first");
         String pet = bundle.getString("pet");
+        String window = bundle.getString("window");
+        String breakfast = bundle.getString("break");
+        String lunch = bundle.getString("lunch");
+        String dinner = bundle.getString("dinner");
+        String rbYes = bundle.getString("rdyes");
+        String mobility = bundle.getString("mobility");
+
+        if (first == null) {
+            first = "";
+        }
+
+        if (pet == null) {
+            pet = "";
+        }
+
+        if (window == null) {
+            window = "";
+        }
+
+        if (breakfast == null) {
+            breakfast = "";
+        }
+
+        if (lunch == null) {
+            lunch = "";
+        }
+
+        if (dinner == null) {
+            dinner = "";
+        }
+
+        if (rbYes == null) {
+            rbYes = "";
+        }
+
+        if (mobility == null) {
+            mobility = "";
+        }
 
         TextView tvReceipt = findViewById(R.id.tvReceiptBody);
-        tvReceipt.setText(pet);
+        tvReceipt.setText(first + "\n" +
+                            pet + "\n" +
+                            window + "\n" +
+                            breakfast + "\n" +
+                            lunch + "\n" +
+                            dinner + "\n" +
+                            rbYes + "\n" +
+                            mobility);
+
+
+        String dateDeparture = bundle.getString("dateDeparture");
+        String dateDestination = bundle.getString("dateDestination");
+
+        TextView tvDates = findViewById(R.id.tvDates);
+        tvDates.setText("Departure date: " + dateDeparture + "\n" + "Arrival date: " + dateDestination);
+
+        TextView tvThanks = findViewById(R.id.tvThanks);
+        tvThanks.setText("Thanks " + sir + name + " for your purchase!");
 
         TextView tvFlightDeparture = findViewById(R.id.tvFlightDeparture);
         tvFlightDeparture.setText(from);
