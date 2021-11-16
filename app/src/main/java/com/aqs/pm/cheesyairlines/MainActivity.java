@@ -3,13 +3,15 @@ package com.aqs.pm.cheesyairlines;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
+import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -18,20 +20,18 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
@@ -56,6 +56,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btBuy;
         btBuy = findViewById(R.id.btBuy);
         btBuy.setOnClickListener(this);
+
+
+
+
+
+
 
         ImageButton imgBtBuy;
         imgBtBuy = findViewById(R.id.imgBtBuy);
@@ -114,19 +120,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         spinner = findViewById(R.id.spinner);
         switch (view.getId()){
             case R.id.btBuy:
-                if (!tvSurname.getText().toString().isEmpty() || !tvFrom.getText().toString().isEmpty()
-                        ||!tvDestination.getText().toString().isEmpty()) {
-                    CallAlertDialog alert = new CallAlertDialog();
-                    bundle.putString("dateDeparture", String.valueOf(tvDepartureDate.getText()));
-                    bundle.putString("dateDestination", String.valueOf(tvDestinationeDate.getText()));
-                    bundle.putString("name", String.valueOf(tvSurname.getText()));
-                    bundle.putString("sir", spinner.getSelectedItem().toString());
-                    bundle.putString("from", String.valueOf(tvFrom.getText()));
-                    bundle.putString("to", String.valueOf(tvDestination.getText()));
-                    alert.showDialog(MainActivity.this, bundle);
+                Configuration config = getResources().getConfiguration();
+                System.out.println(config.smallestScreenWidthDp);
+                if (config.smallestScreenWidthDp >= 600) {
+                    if (!tvSurname.getText().toString().isEmpty() || !tvFrom.getText().toString().isEmpty()
+                            ||!tvDestination.getText().toString().isEmpty()) {
+                        CallAlertDialog alert = new CallAlertDialog();
+                        bundle.putString("dateDeparture", String.valueOf(tvDepartureDate.getText()));
+                        bundle.putString("dateDestination", String.valueOf(tvDestinationeDate.getText()));
+                        bundle.putString("name", String.valueOf(tvSurname.getText()));
+                        bundle.putString("sir", spinner.getSelectedItem().toString());
+                        bundle.putString("from", String.valueOf(tvFrom.getText()));
+                        bundle.putString("to", String.valueOf(tvDestination.getText()));
+                        alert.showDialog(MainActivity.this, bundle);
+                    } else {
+                        Toast.makeText(this,"Empty fields!" ,Toast.LENGTH_SHORT).show();
+                    }
+
                 } else {
-                    Toast.makeText(this,"Empty fields!" ,Toast.LENGTH_SHORT).show();
+                    if (!tvSurname.getText().toString().isEmpty() || !tvFrom.getText().toString().isEmpty()
+                            ||!tvDestination.getText().toString().isEmpty()) {
+                        CallAlertDialog alert = new CallAlertDialog();
+                        bundle.putString("dateDeparture", String.valueOf(tvDepartureDate.getText()));
+                        bundle.putString("dateDestination", String.valueOf(tvDestinationeDate.getText()));
+                        bundle.putString("name", String.valueOf(tvSurname.getText()));
+                        bundle.putString("sir", spinner.getSelectedItem().toString());
+                        bundle.putString("from", String.valueOf(tvFrom.getText()));
+                        bundle.putString("to", String.valueOf(tvDestination.getText()));
+                        alert.showDialog(MainActivity.this, bundle);
+                    } else {
+                        Toast.makeText(this,"Empty fields!" ,Toast.LENGTH_SHORT).show();
+                    }
                 }
+
                 break;
             case R.id.imgFav:
                 //If you press the heart icon at ActionBar it will display a Toast with a design.
