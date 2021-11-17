@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.AlertDialog;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -44,14 +47,22 @@ public class CallAlertDialog extends Activity{
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
-                Intent intent = new Intent(context, SecondActivity.class);
-                intent.putExtra("bundle", bundle);
-                context.startActivity(intent);
+                Configuration config = v.getResources().getConfiguration();
+                if (config.smallestScreenWidthDp >= 600) {
+                    Intent intent = new Intent(context, FragmentActivity.class);
+                    intent.putExtra("bundle", bundle);
+                    context.startActivity(intent);
+                } else {
+                    Intent intent = new Intent(context, SecondActivity.class);
+                    intent.putExtra("bundle", bundle);
+                    context.startActivity(intent);
+                }
             }
         });
 
         dialog.show();
     }
+
 
 
 }

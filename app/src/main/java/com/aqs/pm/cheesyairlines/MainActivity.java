@@ -3,15 +3,10 @@ package com.aqs.pm.cheesyairlines;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -31,16 +26,16 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.Objects;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
 
-    TextView tvDepartureDate, tvDestinationeDate, tvSurname, tvFrom, tvDestination;
+    TextView tvDepartureDate, tvDestinationDate, tvSurname, tvFrom, tvDestination;
     RadioButton rdBtNo, rdBtYes;
 
     Spinner spinner;
 
+
+    Fragment fragment;
     Bundle bundle = new Bundle();
 
     @Override
@@ -56,12 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btBuy;
         btBuy = findViewById(R.id.btBuy);
         btBuy.setOnClickListener(this);
-
-
-
-
-
-
+        fragment = new PurchasedFragment();
 
         ImageButton imgBtBuy;
         imgBtBuy = findViewById(R.id.imgBtBuy);
@@ -102,8 +92,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvFrom = findViewById(R.id.et_origin);
         tvDestination = findViewById(R.id.et_destiny);
 
-        tvDestinationeDate = findViewById(R.id.et_date_destination);
-        tvDestinationeDate.setOnClickListener(this);
+        tvDestinationDate = findViewById(R.id.et_date_destination);
+        tvDestinationDate.setOnClickListener(this);
     }
 
     public void showPopup(View v) {
@@ -114,44 +104,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
     @Override
     public void onClick(View view) {
         spinner = findViewById(R.id.spinner);
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btBuy:
-                Configuration config = getResources().getConfiguration();
-                System.out.println(config.smallestScreenWidthDp);
-                if (config.smallestScreenWidthDp >= 600) {
-                    if (!tvSurname.getText().toString().isEmpty() || !tvFrom.getText().toString().isEmpty()
-                            ||!tvDestination.getText().toString().isEmpty()) {
-                        CallAlertDialog alert = new CallAlertDialog();
-                        bundle.putString("dateDeparture", String.valueOf(tvDepartureDate.getText()));
-                        bundle.putString("dateDestination", String.valueOf(tvDestinationeDate.getText()));
-                        bundle.putString("name", String.valueOf(tvSurname.getText()));
-                        bundle.putString("sir", spinner.getSelectedItem().toString());
-                        bundle.putString("from", String.valueOf(tvFrom.getText()));
-                        bundle.putString("to", String.valueOf(tvDestination.getText()));
-                        alert.showDialog(MainActivity.this, bundle);
-                    } else {
-                        Toast.makeText(this,"Empty fields!" ,Toast.LENGTH_SHORT).show();
-                    }
 
+                if (!tvSurname.getText().toString().isEmpty() || !tvFrom.getText().toString().isEmpty()
+                        || !tvDestination.getText().toString().isEmpty()) {
+                    CallAlertDialog alert = new CallAlertDialog();
+                    bundle.putString("dateDeparture", String.valueOf(tvDepartureDate.getText()));
+                    bundle.putString("dateDestination", String.valueOf(tvDestinationDate.getText()));
+                    bundle.putString("name", String.valueOf(tvSurname.getText()));
+                    bundle.putString("sir", spinner.getSelectedItem().toString());
+                    bundle.putString("from", String.valueOf(tvFrom.getText()));
+                    bundle.putString("to", String.valueOf(tvDestination.getText()));
+                    alert.showDialog(MainActivity.this, bundle);
                 } else {
-                    if (!tvSurname.getText().toString().isEmpty() || !tvFrom.getText().toString().isEmpty()
-                            ||!tvDestination.getText().toString().isEmpty()) {
-                        CallAlertDialog alert = new CallAlertDialog();
-                        bundle.putString("dateDeparture", String.valueOf(tvDepartureDate.getText()));
-                        bundle.putString("dateDestination", String.valueOf(tvDestinationeDate.getText()));
-                        bundle.putString("name", String.valueOf(tvSurname.getText()));
-                        bundle.putString("sir", spinner.getSelectedItem().toString());
-                        bundle.putString("from", String.valueOf(tvFrom.getText()));
-                        bundle.putString("to", String.valueOf(tvDestination.getText()));
-                        alert.showDialog(MainActivity.this, bundle);
-                    } else {
-                        Toast.makeText(this,"Empty fields!" ,Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(this, "Empty fields!", Toast.LENGTH_SHORT).show();
                 }
+
 
                 break;
             case R.id.imgFav:
@@ -190,11 +162,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                final String selectedDate = day + "-" + (month+1) + "-" + year;
+                final String selectedDate = day + "-" + (month + 1) + "-" + year;
                 if (id == R.id.et_date_departure) {
                     tvDepartureDate.setText(selectedDate);
                 } else {
-                    tvDestinationeDate.setText(selectedDate);
+                    tvDestinationDate.setText(selectedDate);
                 }
             }
         });
@@ -207,11 +179,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
-        switch (compoundButton.getId()){
+        switch (compoundButton.getId()) {
             case R.id.cbPet:
                 //If you press the checkbox of "Pet" a toast will be displayed with a paw icon
-                if(isChecked) {
-                    bundle.putString("pet","Pet");
+                if (isChecked) {
+                    bundle.putString("pet", "Pet");
                     LayoutInflater inflater = getLayoutInflater();
                     View layout = inflater.inflate(R.layout.toast_pet,
                             (ViewGroup) findViewById(R.id.toast_layout_root));
@@ -222,12 +194,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     toast.setDuration(Toast.LENGTH_SHORT);
                     toast.setView(layout);
                     toast.show();
+                } else {
+                    bundle.putString("pet", "");
                 }
                 break;
             case R.id.cbFirstClass:
                 if (isChecked) {
-                //If you press the checkbox of "First class" a toast will be displayed with a medal icon
-                    bundle.putString("first","First Class");
+                    //If you press the checkbox of "First class" a toast will be displayed with a medal icon
+                    bundle.putString("first", "First Class");
                     LayoutInflater inflater2 = getLayoutInflater();
                     View layout2 = inflater2.inflate(R.layout.toast_first_class,
                             (ViewGroup) findViewById(R.id.toast_layout_root));
@@ -238,35 +212,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     toast2.setDuration(Toast.LENGTH_SHORT);
                     toast2.setView(layout2);
                     toast2.show();
+                }else {
+                    bundle.putString("first", "");
                 }
                 break;
             case R.id.cbWindowedSeat:
                 if (isChecked)
-                    bundle.putString("window","Windowed Seat");
+                    bundle.putString("window", "Windowed Seat");
+                else
+                    bundle.putString("window", "");
+
                 break;
             case R.id.cbBreakfast:
                 if (isChecked)
-                    bundle.putString("break","Breakfast");
+                    bundle.putString("break", "Breakfast");
+                else
+                    bundle.putString("break", "");
                 break;
             case R.id.cbLunch:
                 if (isChecked)
-                    bundle.putString("lunch","Lunch");
+                    bundle.putString("lunch", "Lunch");
+                else
+                    bundle.putString("lunch", "");
                 break;
             case R.id.cbDinner:
                 if (isChecked)
-                    bundle.putString("dinner","Dinner");
+                    bundle.putString("dinner", "Dinner");
+                else
+                    bundle.putString("dinner", "");
                 break;
             case R.id.radioBtYes:
                 if (isChecked)
-                    bundle.putString("rdyes","Insurance");
+                    bundle.putString("rdyes", "Insurance");
+                else
+                    bundle.putString("rdyes", "");
                 break;
             case R.id.switch_mobility:
                 if (isChecked)
                     bundle.putString("mobility", "Reduced Mobility");
+                else
+                    bundle.putString("mobility", "");
                 break;
 
         }
     }
+
 
     private class MyUndoListener implements View.OnClickListener {
         @Override
