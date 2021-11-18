@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     bundle.putString("sir", spinner.getSelectedItem().toString());
                     bundle.putString("from", String.valueOf(tvFrom.getText()));
                     bundle.putString("to", String.valueOf(tvDestination.getText()));
+
                     alert.showDialog(MainActivity.this, bundle);
                 } else {
                     Toast.makeText(this, "Empty fields!", Toast.LENGTH_SHORT).show();

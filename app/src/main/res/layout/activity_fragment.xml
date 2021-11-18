@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView2"
+            android:id="@+id/purchasedFragmentContainer"
             android:name="com.aqs.pm.cheesyairlines.PurchasedFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -42,7 +42,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView2"
+            app:layout_constraintTop_toBottomOf="@+id/purchasedFragmentContainer"
             tools:layout="@layout/fragment_bill" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
