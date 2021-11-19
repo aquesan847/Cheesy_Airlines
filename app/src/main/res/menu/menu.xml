@@ -2,50 +2,50 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_settings"
+    <item android:id="@+id/account_settings"
         android:title="@string/action_settings"
         app:showAsAction="never">
         <menu>
-            <item android:id="@+id/action_settings12"
+            <item android:id="@+id/personal_data_settings"
                 android:title="@string/action_settings12" />
-            <item android:id="@+id/action_settings13"
+            <item android:id="@+id/travelling_docs_settings"
                 android:title="@string/action_settings13" />
-            <item android:id="@+id/action_settings14"
+            <item android:id="@+id/travelling_partners_settings"
                 android:title="@string/action_settings14" />
         </menu>
     </item>
 
-    <item android:id="@+id/action_settings1"
+    <item android:id="@+id/travels_settings"
         android:title="@string/action_settings1"
         app:showAsAction="never"></item>
-    <item android:id="@+id/action_settings2"
+    <item android:id="@+id/boarding_settings"
         android:title="@string/action_settings2"
         app:showAsAction="never"></item>
-    <item android:id="@+id/action_settings3"
+    <item android:id="@+id/fly_settings"
         android:title="@string/action_settings3"
         app:showAsAction="never"></item>
-    <item android:id="@+id/action_settings4"
+    <item android:id="@+id/info_settings"
         android:title="@string/action_settings4"
         app:showAsAction="never"></item>
-    <item android:id="@+id/action_settings5"
+    <item android:id="@+id/gift_settings"
         android:title="@string/action_settings5"
         app:showAsAction="never"></item>
-    <item android:id="@+id/action_settings6"
+    <item android:id="@+id/magazines_settings"
         android:title="@string/action_settings6"
         app:showAsAction="never"></item>
-    <item android:id="@+id/action_settings7"
+    <item android:id="@+id/termcond_settings"
         android:title="@string/action_settings7"
         app:showAsAction="never"></item>
-    <item android:id="@+id/action_settings8"
+    <item android:id="@+id/help_settings"
         android:title="@string/action_settings8"
         app:showAsAction="never"></item>
-    <item android:id="@+id/action_settings9"
+    <item android:id="@+id/contact_settings"
         android:title="@string/action_settings9"
         app:showAsAction="never"></item>
-    <item android:id="@+id/action_settings10"
+    <item android:id="@+id/privacy_politics_settings"
         android:title="@string/action_settings10"
         app:showAsAction="never"></item>
-    <item android:id="@+id/action_settings11"
+    <item android:id="@+id/privacy_config_settings"
         android:title="@string/action_settings11"
         app:showAsAction="never"></item>
 </menu>

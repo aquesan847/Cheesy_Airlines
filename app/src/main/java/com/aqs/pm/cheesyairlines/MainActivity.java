@@ -1,25 +1,17 @@
 package com.aqs.pm.cheesyairlines;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.PopupMenu;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.app.DatePickerDialog;
-import android.content.Context;
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -28,48 +20,47 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.Objects;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, PopupMenu.OnMenuItemClickListener {
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
-
-
-    TextView tvDepartureDate, tvDestinationeDate, tvSurname, tvFrom, tvDestination;
+    TextView tvDepartureDate, tvDestinationDate, tvSurname, tvFrom, tvDestination;
     RadioButton rdBtNo, rdBtYes;
-
     Spinner spinner;
-
     Bundle bundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Instantiate Toolbar, with a Image View of a heart with an OnClickListener
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ImageView imgFav;
         imgFav = findViewById(R.id.imgFav);
         imgFav.setOnClickListener(this);
 
+        // Instantiate Button Buy (the yellow one) and add OnClickListener
         Button btBuy;
         btBuy = findViewById(R.id.btBuy);
         btBuy.setOnClickListener(this);
 
-
-
-
-
-
-
+        // Instantiate Image Button (the orange one) with an OnClickListener
         ImageButton imgBtBuy;
         imgBtBuy = findViewById(R.id.imgBtBuy);
         imgBtBuy.setOnClickListener(this);
 
+        // Instantiate Switch with an OnCheckedChangeListener, also we suppress an error caused by use Switch instead of AppCompat or Material ones
+        @SuppressLint("UseSwitchCompatOrMaterialCode")
         Switch switchMobility = findViewById(R.id.switch_mobility);
         switchMobility.setOnCheckedChangeListener(this);
 
+        // Instantiate Checkboxes with their OnCheckedChangeListener
         CheckBox cbPet = findViewById(R.id.cbPet);
         cbPet.setOnCheckedChangeListener(this);
 
@@ -88,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         CheckBox cbDinner = findViewById(R.id.cbDinner);
         cbDinner.setOnCheckedChangeListener(this);
 
+        // Instantiate RadioButtons with their OnCheckedChangeListener
         rdBtYes = findViewById(R.id.radioBtYes);
         rdBtYes.setOnCheckedChangeListener(this);
 
@@ -95,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rdBtNo.setChecked(true);
         rdBtNo.setOnCheckedChangeListener(this);
 
+        // Instantiate TextViews for use them in a Bundle
         tvDepartureDate = findViewById(R.id.et_date_departure);
         tvDepartureDate.setOnClickListener(this);
 
@@ -102,64 +95,113 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvFrom = findViewById(R.id.et_origin);
         tvDestination = findViewById(R.id.et_destiny);
 
-        tvDestinationeDate = findViewById(R.id.et_date_destination);
-        tvDestinationeDate.setOnClickListener(this);
+        tvDestinationDate = findViewById(R.id.et_date_destination);
+        tvDestinationDate.setOnClickListener(this);
     }
 
+    // Method showPopup is for click on right top button (menu button)
+    // The method instantiates the menu, add OnMenuItemClickListener and show it
     public void showPopup(View v) {
         PopupMenu popup = new PopupMenu(this, v);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu, popup.getMenu());
+        popup.setOnMenuItemClickListener(this);
         popup.show();
     }
 
+    // OnMenuItemClick, a method generated by Android Studio when we used setOnMenuItemClickListener
+    // Use switch for each item menu by their id, each one redirect us to a website
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.travels_settings:
+                goToUrl("https://www.traveloptions.net/");
+                return true;
+            case R.id.boarding_settings:
+                goToUrl("https://www.ana.co.jp/en/us/travel-information/boarding-procedures/");
+                return true;
+            case R.id.fly_settings:
+                goToUrl("https://www.youtube.com/watch?v=58D3Qh2oDIs");
+                return true;
+            case R.id.info_settings:
+                goToUrl("https://play-lh.googleusercontent.com/lWNRppWHVw18TreV4fs1TjPMI6CQYSiiN_46cIOuK5UJe7VRFnLE5mtuQ9CGWai32AzY=s180-rw");
+                return true;
+            case R.id.gift_settings:
+                goToUrl("https://c.tenor.com/ycakT-72TBMAAAAi/present-gift.gif");
+                return true;
+            case R.id.magazines_settings:
+                goToUrl("https://theworldwentaway.files.wordpress.com/2011/11/plt65-ag_event-65cover.jpg");
+                return true;
+            case R.id.termcond_settings:
+                goToUrl("https://longdogechallenge.com/");
+                return true;
+            case R.id.help_settings:
+                goToUrl("http://www.everydayim.com/");
+                return true;
+            case R.id.contact_settings:
+                goToUrl("http://www.staggeringbeauty.com/");
+                return true;
+            case R.id.privacy_politics_settings:
+                goToUrl("https://smashthewalls.com/");
+                return true;
+            case R.id.privacy_config_settings:
+                goToUrl("https://puginarug.com/");
+                return true;
+            case R.id.personal_data_settings:
+                goToUrl("https://ec.europa.eu/info/law/law-topic/data-protection/reform/what-personal-data_es");
+                return true;
+            case R.id.travelling_docs_settings:
+                goToUrl("https://europa.eu/youreurope/citizens/travel/entry-exit/index_en.htm");
+                return true;
+            case R.id.travelling_partners_settings:
+                goToUrl("https://www.workaway.info/en/community/travelbuddy");
+                return true;
+            default:
+                return false;
+        }
+    }
 
+    // Method used for go a website, we use Uri with a String that we pass to it and an Intent
+    private void goToUrl(String url) {
+        Uri uriUrl = Uri.parse(url);
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(launchBrowser);
+    }
 
+    // Method generated when we used OnClickListener
+    // Used switch for all
+    // Also we instantiate spinner for a correct use of it
+    @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
     @Override
     public void onClick(View view) {
         spinner = findViewById(R.id.spinner);
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btBuy:
-                Configuration config = getResources().getConfiguration();
-                System.out.println(config.smallestScreenWidthDp);
-                if (config.smallestScreenWidthDp >= 600) {
-                    if (!tvSurname.getText().toString().isEmpty() || !tvFrom.getText().toString().isEmpty()
-                            ||!tvDestination.getText().toString().isEmpty()) {
-                        CallAlertDialog alert = new CallAlertDialog();
-                        bundle.putString("dateDeparture", String.valueOf(tvDepartureDate.getText()));
-                        bundle.putString("dateDestination", String.valueOf(tvDestinationeDate.getText()));
-                        bundle.putString("name", String.valueOf(tvSurname.getText()));
-                        bundle.putString("sir", spinner.getSelectedItem().toString());
-                        bundle.putString("from", String.valueOf(tvFrom.getText()));
-                        bundle.putString("to", String.valueOf(tvDestination.getText()));
-                        alert.showDialog(MainActivity.this, bundle);
-                    } else {
-                        Toast.makeText(this,"Empty fields!" ,Toast.LENGTH_SHORT).show();
-                    }
-
+                // When we press the yellow button it check if we have empty fields, in true case it calls CallAlertDialog class
+                // and pass a bundle with all required data.
+                // CallAlertDialog shows a Activity with a message and two buttons, one for cancel and another for continue with the purchase
+                // In false case it shows a Toast advising for the empty fields
+                if (!tvSurname.getText().toString().isEmpty() || !tvFrom.getText().toString().isEmpty()
+                        || !tvDestination.getText().toString().isEmpty()) {
+                    CallAlertDialog alert = new CallAlertDialog();
+                    bundle.putString("dateDeparture", String.valueOf(tvDepartureDate.getText()));
+                    bundle.putString("dateDestination", String.valueOf(tvDestinationDate.getText()));
+                    bundle.putString("name", String.valueOf(tvSurname.getText()));
+                    bundle.putString("sir", spinner.getSelectedItem().toString());
+                    bundle.putString("from", String.valueOf(tvFrom.getText()));
+                    bundle.putString("to", String.valueOf(tvDestination.getText()));
+                    alert.showDialog(MainActivity.this, bundle);
                 } else {
-                    if (!tvSurname.getText().toString().isEmpty() || !tvFrom.getText().toString().isEmpty()
-                            ||!tvDestination.getText().toString().isEmpty()) {
-                        CallAlertDialog alert = new CallAlertDialog();
-                        bundle.putString("dateDeparture", String.valueOf(tvDepartureDate.getText()));
-                        bundle.putString("dateDestination", String.valueOf(tvDestinationeDate.getText()));
-                        bundle.putString("name", String.valueOf(tvSurname.getText()));
-                        bundle.putString("sir", spinner.getSelectedItem().toString());
-                        bundle.putString("from", String.valueOf(tvFrom.getText()));
-                        bundle.putString("to", String.valueOf(tvDestination.getText()));
-                        alert.showDialog(MainActivity.this, bundle);
-                    } else {
-                        Toast.makeText(this,"Empty fields!" ,Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(this, "Empty fields!", Toast.LENGTH_SHORT).show();
                 }
-
                 break;
             case R.id.imgFav:
                 //If you press the heart icon at ActionBar it will display a Toast with a design.
                 LayoutInflater inflater = getLayoutInflater();
                 View layout = inflater.inflate(R.layout.toast_fav,
-                        (ViewGroup) findViewById(R.id.toast_layout_root));
-                TextView text = (TextView) layout.findViewById(R.id.text);
+                        findViewById(R.id.toast_layout_root));
+                TextView text = layout.findViewById(R.id.text);
                 text.setText("Favorite");
 
                 Toast toast = new Toast(getApplicationContext());
@@ -169,13 +211,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.imgBtBuy:
-                //Snackbar with design. I changed the text color to my cheesy yellow set at colors.xml
+                // Snackbar with design. I changed the text color to my cheesy yellow set at colors.xml
+                // Also it has an action for a retry
                 Snackbar snackbarBuyNow = Snackbar.make(view, R.string.buy_now_snack, BaseTransientBottomBar.LENGTH_INDEFINITE);
                 snackbarBuyNow.setActionTextColor(getResources().getColor(R.color.cheesy_yellow))
                         .setAction(R.string.buy_now_error, new MyUndoListener());
                 snackbarBuyNow.show();
                 break;
 
+            // When the EditText for the dates of departure or destination are pressed an DatePickerDialog is shown
             case R.id.et_date_departure:
                 showDatePickerDialog(R.id.et_date_departure);
                 break;
@@ -186,16 +230,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    // Method for show DatePickerDialog
+    // It uses DatePickerFragment class with different values as day, month and year
+    // Returns the selected date like a String and set it on a EditText
     private void showDatePickerDialog(int id) {
-        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                final String selectedDate = day + "-" + (month+1) + "-" + year;
-                if (id == R.id.et_date_departure) {
-                    tvDepartureDate.setText(selectedDate);
-                } else {
-                    tvDestinationeDate.setText(selectedDate);
-                }
+        DatePickerFragment newFragment = DatePickerFragment.newInstance((datePicker, year, month, day) -> {
+            final String selectedDate = day + "-" + (month + 1) + "-" + year;
+            if (id == R.id.et_date_departure) {
+                tvDepartureDate.setText(selectedDate);
+            } else {
+                tvDestinationDate.setText(selectedDate);
             }
         });
 
@@ -203,19 +247,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
+    // Method generated when we used setOnCheckedChangeListener
+    // Used switch for all and boolean isChecked to see if it is checked or not
+    // If an extra is checked it is passed to the bundle for the final receipt
+    @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
-        switch (compoundButton.getId()){
+        switch (compoundButton.getId()) {
             case R.id.cbPet:
-                //If you press the checkbox of "Pet" a toast will be displayed with a paw icon
-                if(isChecked) {
-                    bundle.putString("pet","Pet");
+                //If you press the checkbox of "Pet" a toast will be displayed with a style and a paw icon
+                if (isChecked) {
+                    bundle.putString("pet", "Pet");
                     LayoutInflater inflater = getLayoutInflater();
                     View layout = inflater.inflate(R.layout.toast_pet,
-                            (ViewGroup) findViewById(R.id.toast_layout_root));
-                    TextView text = (TextView) layout.findViewById(R.id.text);
+                            findViewById(R.id.toast_layout_root));
+                    TextView text = layout.findViewById(R.id.text);
                     text.setText("Pet");
 
                     Toast toast = new Toast(getApplicationContext());
@@ -226,12 +273,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.cbFirstClass:
                 if (isChecked) {
-                //If you press the checkbox of "First class" a toast will be displayed with a medal icon
-                    bundle.putString("first","First Class");
+                    //If you press the checkbox of "First class" a toast will be displayed with a style and a medal icon
+                    bundle.putString("first", "First Class");
                     LayoutInflater inflater2 = getLayoutInflater();
                     View layout2 = inflater2.inflate(R.layout.toast_first_class,
-                            (ViewGroup) findViewById(R.id.toast_layout_root));
-                    TextView text2 = (TextView) layout2.findViewById(R.id.text);
+                            findViewById(R.id.toast_layout_root));
+                    TextView text2 = layout2.findViewById(R.id.text);
                     text2.setText("First class set");
 
                     Toast toast2 = new Toast(getApplicationContext());
@@ -242,23 +289,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.cbWindowedSeat:
                 if (isChecked)
-                    bundle.putString("window","Windowed Seat");
+                    bundle.putString("window", "Windowed Seat");
                 break;
             case R.id.cbBreakfast:
                 if (isChecked)
-                    bundle.putString("break","Breakfast");
+                    bundle.putString("break", "Breakfast");
                 break;
             case R.id.cbLunch:
                 if (isChecked)
-                    bundle.putString("lunch","Lunch");
+                    bundle.putString("lunch", "Lunch");
                 break;
             case R.id.cbDinner:
                 if (isChecked)
-                    bundle.putString("dinner","Dinner");
+                    bundle.putString("dinner", "Dinner");
                 break;
             case R.id.radioBtYes:
                 if (isChecked)
-                    bundle.putString("rdyes","Insurance");
+                    bundle.putString("rdyes", "Insurance");
                 break;
             case R.id.switch_mobility:
                 if (isChecked)
@@ -268,10 +315,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private class MyUndoListener implements View.OnClickListener {
+    // It is the action for the snackbar, shows a toast with an error
+    private static class MyUndoListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            System.out.println("Error retrying");
+            Toast.makeText(view.getContext(), "An error has occurred", Toast.LENGTH_SHORT).show();
         }
     }
 }

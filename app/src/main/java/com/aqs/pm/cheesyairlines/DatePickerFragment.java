@@ -3,7 +3,6 @@ package com.aqs.pm.cheesyairlines;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.widget.DatePicker;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -14,6 +13,7 @@ public class DatePickerFragment extends DialogFragment {
 
     private DatePickerDialog.OnDateSetListener listener;
 
+    // When gets an newInstance return the fragment
     public static DatePickerFragment newInstance(DatePickerDialog.OnDateSetListener listener) {
         DatePickerFragment fragment = new DatePickerFragment();
         fragment.setListener(listener);
@@ -24,6 +24,7 @@ public class DatePickerFragment extends DialogFragment {
         this.listener = listener;
     }
 
+    //When the dialog is created it get data provided by clicking and returns it
     @Override
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
