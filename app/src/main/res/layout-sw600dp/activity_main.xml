@@ -23,25 +23,11 @@
         app:titleTextColor="@color/black">
 
         <ImageView
-            android:id="@+id/imgMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:contentDescription="@string/todo"
-            android:onClick="showPopup"
-            android:paddingEnd="16dp"
-            app:srcCompat="@drawable/ic_baseline_menu_24"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck"
-            tools:layout_editor_absoluteX="331dp"
-            tools:layout_editor_absoluteY="16dp" />
-
-        <ImageView
             android:id="@+id/imgFav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:contentDescription="@string/todo"
-            android:onClick="showPopup"
             android:paddingEnd="16dp"
             app:srcCompat="@drawable/ic_baseline_favorite_border_24"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,ImageContrastCheck"

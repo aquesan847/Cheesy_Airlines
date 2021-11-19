@@ -22,31 +22,33 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:titleTextColor="@color/black">
 
-        <ImageView
-            android:id="@+id/imgMenu"
+
+        <TextView
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:contentDescription="@string/todo"
-            android:onClick="showPopup"
-            android:paddingEnd="16dp"
-            app:srcCompat="@drawable/ic_baseline_menu_24"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck"
-            tools:layout_editor_absoluteX="331dp"
-            tools:layout_editor_absoluteY="16dp" />
+            android:layout_gravity="start"
+            android:fontFamily="@font/abeezee"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="18dp" />
 
         <ImageView
             android:id="@+id/imgFav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:layout_margin="16dp"
             android:contentDescription="@string/todo"
-            android:onClick="showPopup"
-            android:paddingEnd="16dp"
             app:srcCompat="@drawable/ic_baseline_favorite_border_24"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,ImageContrastCheck"
             tools:layout_editor_absoluteX="307dp"
             tools:layout_editor_absoluteY="16dp" />
+
+
+
     </androidx.appcompat.widget.Toolbar>
 
     <ImageView
@@ -390,9 +392,8 @@
         android:id="@+id/btBuy"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="48dp"
         android:layout_marginBottom="16dp"
         android:text="@string/bt_buy"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -406,9 +407,8 @@
         android:id="@+id/imgBtBuy"
         android:layout_width="140dp"
         android:layout_height="75sp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="32dp"
         android:backgroundTint="#00FFFFFF"
         android:contentDescription="@string/todo"
         android:scaleType="fitXY"
@@ -424,6 +424,7 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="@+id/et_date_departure"
         app:layout_constraintEnd_toStartOf="@+id/et_date_destination"
         app:layout_constraintStart_toEndOf="@+id/et_date_departure"
