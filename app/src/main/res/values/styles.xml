@@ -4,4 +4,8 @@
     <style name="font_text">
         <item name="android:fontFamily">serif-monospace</item>
     </style>
+    <style name="AppCompatTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="android:windowActionBar">false</item>
+        <item name="windowActionBar">false</item>
+    </style>
 </resources>
